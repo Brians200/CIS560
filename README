@@ -1,0 +1,16 @@
+In order to work on this, you will need:
+Java Runtime Environment SE 6.20+(JRE)
+http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+Groovy
+http://groovy.codehaus.org/Download?nc
+
+Grails
+http://grails.org/Download
+
+Springsource STS
+http://www.springsource.com/landing/best-development-tool-enterprise-java
+Scroll to the bottom and say i would rather not fill in the form, just take me to the download page
+This is a clone of eclipse, so it should be familiar. THIS WAS DESIGNED FOR GROOVY AND GRAILS INTEGRATION SO WE WILL BE USING THIS, plus we will be running off of spring for parts of the server, which is already built in
+
+	inside of STS, you will need to install the add on Grails, Grails Support, Groovy eclipse,
