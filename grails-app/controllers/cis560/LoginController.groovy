@@ -32,6 +32,7 @@ class LoginController {
 			}
 			else
 			{
+				flash.message = "Invalid Username/Password combination"
 				chain(controller:"login", action:"login",model:[badLogin:true])
 			}
 			
@@ -40,9 +41,11 @@ class LoginController {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			render("There is an error")
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			render("There is an error")
 		}
 		
 		

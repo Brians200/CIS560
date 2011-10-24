@@ -113,6 +113,15 @@ div.errors {
     margin: 10px 0 5px 0;
     padding: 5px 0 5px 0;
 }
+
+div.loginerrors{
+	background: #fff3f3;
+    border: 1px solid red;
+    color: #cc0000;
+    margin: 10px 0 5px 0;
+    padding: 5px 0 5px 0;
+    width:30em;
+}
 div.errors ul {
     list-style: none;
     padding: 0;
@@ -273,10 +282,11 @@ th.desc a {
 }
 
 
-{
-float:right;
+.loginPadding{
+	padding-top: 10px;
+	padding-left: 10px;
 }
-two
-{
-float:right;
+
+.hiddenDiv{
+	display: none;	
 }
