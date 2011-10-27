@@ -14,3 +14,5 @@ Scroll to the bottom and say i would rather not fill in the form, just take me t
 This is a clone of eclipse, so it should be familiar. THIS WAS DESIGNED FOR GROOVY AND GRAILS INTEGRATION SO WE WILL BE USING THIS, plus we will be running off of spring for parts of the server, which is already built in
 
 	inside of STS, you will need to install the add on Grails, Grails Support, Groovy eclipse,
+
+	Nobody likes you.
