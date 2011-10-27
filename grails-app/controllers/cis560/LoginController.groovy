@@ -5,7 +5,7 @@ class LoginController {
 	private static Connection connect = null;
 	
     def login = { 
-//TODO: produce error
+
 	}
 	
 	def validateUser = {
@@ -28,7 +28,8 @@ class LoginController {
 		
 			if(loginInt==1)
 			{
-				chain(controller:"homescreen",action:"index", model:[userName:params.userName])
+				session.userName = params.userName;
+				chain(controller:"homescreen",action:"index")
 			}
 			else
 			{

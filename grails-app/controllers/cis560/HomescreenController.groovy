@@ -2,16 +2,20 @@ package cis560
 
 class HomescreenController {
 
-    def index = { 
-		if(chainModel==null||chainModel.userName==null)
-		{
-			//NO ONE IS LOGGED IN
-			//send to login screen
+	def beforeInterceptor = [action:this.&auth]
+	
+	def auth() {
+		if(!session.userName) {
 			flash.message = "You must log in first"
-			chain(controller:"login", action:"login",model:[notLoggedIn:true])
+			redirect(controller:"login", action:"login")
+			return false
 		}
+	}
+	
+	
+    def index = { 
 		
 		//MODEL TO BE PASSED TO homescreen/index.gsp
-		[userName:chainModel.userName]		
+		[userName:session.userName]		
     }
 }

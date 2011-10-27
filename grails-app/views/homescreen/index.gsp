@@ -9,9 +9,6 @@
 					${flash.message}
 				</div>
 			</g:if>
-			<div class="hiddenDiv">
-				<g:textField name="userName" value="${userName }"/>
-			</div>
 			<g:form controller="user" method="post">
 				Welcome ${userName }
 				<br>
