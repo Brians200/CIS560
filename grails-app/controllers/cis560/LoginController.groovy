@@ -1,5 +1,6 @@
 package cis560
 import java.sql.*;
+import cis560.SqlLogic;
 class LoginController {
 
 	private static Connection connect = null;
@@ -11,15 +12,14 @@ class LoginController {
 	def validateUser = {
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver")
-			connect = DriverManager.getConnection("jdbc:mysql://mysql.cis.ksu.edu/bsweeney","bsweeney", "a1b2c3d4e5")
+			String loginStatement = "select count(*) from Users where username=? and passwd=PASSWORD(?)"
+			SqlLogic.SetStatement(loginStatement)
+			SqlLogic.ClearParameters();
+			SqlLogic.SetStringParameter(1, params.userName)
+			SqlLogic.SetStringParameter(2,params.password)
 			
-			PreparedStatement loginStatement = connect.prepareStatement("select count(*) from Users where username=? and passwd=PASSWORD(?)")
-			loginStatement.clearParameters()
-			loginStatement.setString(1, params.userName)
-			loginStatement.setString(2,params.password)
 			
-			ResultSet loginResult = loginStatement.executeQuery()
+			ResultSet loginResult = SqlLogic.ExecuteQuery();
 			loginResult.next()
 			//0 bad login 
 			//1 good login
