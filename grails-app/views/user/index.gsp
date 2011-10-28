@@ -3,7 +3,7 @@
 		<meta name="layout" content="main" />
 	</head>
 	<body>
-		<g:each in="${userList}">
+		<g:each in="${abc}">
 			<p>${it }</p>
 		</g:each>
 	</body>
