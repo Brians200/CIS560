@@ -6,6 +6,7 @@ eclipse
 stacktrace.log
 target
 /plugins
+/web-app
 /web-app/plugins
 /web-app/WEB-INF/classes
 *.class
