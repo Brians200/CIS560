@@ -4,6 +4,7 @@ class StockController {
 
     def index = {
 		
+		chain(controller:"stock",action:"viewStock")
 	}
 	
 	def viewStock={

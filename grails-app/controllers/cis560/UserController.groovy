@@ -22,7 +22,8 @@ class UserController {
 		{
 			userList.add(users.getString(1))
 		}
+		
 		users.close();
-		[abc:userList]
+	[userList:userList]
 	}
 }
