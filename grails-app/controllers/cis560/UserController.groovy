@@ -23,6 +23,6 @@ class UserController {
 			userList.add(users.getString(1))
 		}
 		users.close();
-		render("hey")	
+		[userList:userList]
 	}
 }
