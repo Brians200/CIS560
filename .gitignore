@@ -13,3 +13,4 @@ target
 target/classes/cis560/UserController$_closure1.class
 target/classes/cis560/UserController.class
 target*
+web-app/*
