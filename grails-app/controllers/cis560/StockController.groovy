@@ -7,6 +7,8 @@ class StockController {
 		chain(controller:"stock",action:"viewStock")
 	}
 	
+	def transaction={ }
+	
 	def viewStock={
 		
 		def stockSymbol

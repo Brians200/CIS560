@@ -13,7 +13,7 @@ class UserController {
 		}
 	}
 	
-	
+	//List
     def index = {
 		SqlLogic.SetStatement("select username from Users")
 		ResultSet users = SqlLogic.ExecuteQuery()
@@ -24,6 +24,8 @@ class UserController {
 		}
 		
 		users.close();
-	[userList:userList]
+		[userList:userList]
 	}
+	
+	def delete = { }
 }

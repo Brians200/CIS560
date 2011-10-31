@@ -9,6 +9,8 @@ class LoginController {
 
 	}
 	
+	def createUser = { }
+	
 	def validateUser = {
 		
 		try {
@@ -47,10 +49,7 @@ class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			render("There is an error")
-		}
-		
-		
-		
+		}	
 	
 	}
 }
