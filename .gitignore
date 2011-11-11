@@ -1,3 +1,4 @@
+target/stacktrace.log
 *.iws
 *Db.properties
 *Db.script
