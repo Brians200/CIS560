@@ -9,6 +9,11 @@ class LoginController {
 
 	}
 	
+	def logout = {
+		session.userName = null;
+		chain(controller:"homescreen",action:"index")
+	}
+	
 	def createUser = { }
 	
 	def validateUser = {
