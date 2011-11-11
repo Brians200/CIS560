@@ -35,6 +35,7 @@ public class SqlLogic {
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println(preparedStatement.toString());
 			e.printStackTrace();
 		}
 		return resultSet;
