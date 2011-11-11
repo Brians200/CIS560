@@ -2,7 +2,7 @@ package cis560
 
 class HomescreenController {
 
-	def beforeInterceptor = [action:this.&auth]
+	/*def beforeInterceptor = [action:this.&auth]
 	
 	def auth() {
 		if(!session.userName) {
@@ -10,7 +10,7 @@ class HomescreenController {
 			redirect(controller:"login", action:"login")
 			return false
 		}
-	}
+	}*/
 	
 	
     def index = { 
