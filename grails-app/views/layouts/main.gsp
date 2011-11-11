@@ -9,7 +9,7 @@
         <div id="spinner" class="spinner" style="display:none;">
             <img src="${resource(dir:'images',file:'spinner.gif')}" alt="${message(code:'spinner.alt',default:'Loading...')}" />
         </div>
-        <g:loginHeader/>
+       	<g:render template="/titleBar" />
         <g:layoutBody />
     </body>
 </html>

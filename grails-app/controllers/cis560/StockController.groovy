@@ -15,12 +15,16 @@ class StockController {
 		
 		def stockSymbol = "FCCY"
 		def stockExchange = "NASDAQ"
+		if(params.stockSymbol!=null)
+		{
+			stockSymbol = params.stockSymbol
+		}
 		if(chainModel!=null&&chainModel.Symbol!=null&&chainModel.Exchange!=null)
 		{
 			stockSymbol = chainModel.Symbol
 			stockExchange = chainModel.Exchange
 		}
-		String loginStatement = "select date,adjclose,volume from History where ename=? and symbol=? and date>=? ;"
+		String loginStatement = "select tdate,adjclose,volume from History where ename=? and symbol=? and tdate>=? ;"
 		SqlLogic.SetStatement(loginStatement)
 		SqlLogic.ClearParameters();
 		SqlLogic.SetStringParameter(1,stockExchange)

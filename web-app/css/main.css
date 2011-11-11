@@ -290,3 +290,24 @@ th.desc a {
 .hiddenDiv{
 	display: none;	
 }
+
+
+#loginboxes{
+	float:right;
+	color:#FFF;
+	padding-right:10px;
+	padding-top:10px;
+}
+
+.titlebar{
+	width:100%;	
+	background-color:#512888;
+	height:10em;
+}
+
+#titleText{
+	float:left;
+	font-size:5.5em;
+	color:#FFF;
+	padding-left:10px;
+}
