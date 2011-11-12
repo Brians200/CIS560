@@ -18,6 +18,7 @@ class StockController {
 		if(params.stockSymbol!=null)
 		{
 			stockSymbol = params.stockSymbol
+			stockExchange = params.exchange
 		}
 		if(chainModel!=null&&chainModel.Symbol!=null&&chainModel.Exchange!=null)
 		{
@@ -29,7 +30,7 @@ class StockController {
 		SqlLogic.ClearParameters();
 		SqlLogic.SetStringParameter(1,stockExchange)
 		SqlLogic.SetStringParameter(2,stockSymbol)
-		SqlLogic.SetStringParameter(3,"2011-09-31")
+		SqlLogic.SetStringParameter(3,"2011-06-1")
 		
 		ResultSet tableResult = SqlLogic.ExecuteQuery();
 		def tablep = []

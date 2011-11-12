@@ -302,7 +302,7 @@ th.desc a {
 .titlebar{
 	width:100%;	
 	background-color:#512888;
-	height:10em;
+	height:11em;
 }
 
 #titleText{
@@ -310,4 +310,16 @@ th.desc a {
 	font-size:5.5em;
 	color:#FFF;
 	padding-left:10px;
+}
+
+.symbolExchange{
+	width:5em;
+}
+
+#bottomHeader{
+	position:relative;
+	top:2em;
+	left:18em;
+	float:right;
+	color:#FFF;
 }
