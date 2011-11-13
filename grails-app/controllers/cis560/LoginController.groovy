@@ -14,7 +14,9 @@ class LoginController {
 		chain(controller:"homescreen",action:"index")
 	}
 	
-	def createUser = { }
+	def createUser = { 
+		println 'hi'	
+	}
 	
 	def validateUser = {
 		

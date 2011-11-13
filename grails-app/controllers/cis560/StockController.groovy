@@ -18,9 +18,22 @@ class StockController {
 		if(params.stockSymbol!=null)
 		{
 			stockSymbol = params.stockSymbol
-			stockExchange = params.exchange
+			String exchangeQuery = """select ename from Stock where symbol='${params.stockSymbol}'""".toString()
+			SqlLogic.SetStatement(exchangeQuery)
+			ResultSet exchangeResult = SqlLogic.ExecuteQuery()
+			
+			if(exchangeResult.next())
+			{
+				stockExchange=exchangeResult.getString(1)
+			}
+			else
+			{
+//TODO: RENDER THAT THE SYMBOL DOES NOT EXIST
+			}
+			exchangeResult.close()
+			
 		}
-		if(chainModel!=null&&chainModel.Symbol!=null&&chainModel.Exchange!=null)
+		else if(chainModel!=null&&chainModel.Symbol!=null&&chainModel.Exchange!=null)
 		{
 			stockSymbol = chainModel.Symbol
 			stockExchange = chainModel.Exchange
