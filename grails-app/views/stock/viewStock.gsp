@@ -1,5 +1,6 @@
 <html>  
 <head>
+	<meta name="layout" content="main" />
     <!--Load the AJAX API-->    
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>    
 <script type="text/javascript">          

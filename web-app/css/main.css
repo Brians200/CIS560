@@ -317,9 +317,16 @@ th.desc a {
 }
 
 #bottomHeader{
-	position:relative;
-	top:2em;
-	left:18em;
 	float:right;
 	color:#FFF;
+	padding-right:10px;
+	border-color:#FFFFFF;
+	border-width:1px;
+	border-style:solid;
+}
+
+#topHeader{
+	border-color:#000;
+	border-width:1px;
+	border-style:solid;
 }
