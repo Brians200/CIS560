@@ -11,10 +11,13 @@
 			</g:if>
 			<g:form>
 				Username
-				<g:textField name="Username"></g:textField>
+				<g:textField name="Username"/>
+				<br/>
+				Email
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<g:textField name="Email"/>
 				<br/>
 				Password
-				&nbsp;<g:passwordField name="Password"></g:passwordField>
+				&nbsp;<g:passwordField name="Password"/>
 				<br/>
 				<g:actionSubmit value="Create User" action="createUserMySQL"/>
 			</g:form>

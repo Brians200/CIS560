@@ -36,7 +36,7 @@ class LoginController {
 			else
 			{
 				userExists.close()
-				String createUser = """insert into Users values('${params.Username}',Password('${params.Password}'))"""
+				String createUser = """insert into Users values('${params.Username}','${params.Email}',Password('${params.Password}'))"""
 				SqlLogic.SetStatement(createUser)
 				SqlLogic.ExecuteUpdate()
 				session.userName = params.Username
