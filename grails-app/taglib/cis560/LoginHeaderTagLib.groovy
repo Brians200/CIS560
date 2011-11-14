@@ -25,7 +25,7 @@ class LoginHeaderTagLib {
 			out<< "<br>"
 			out<< "<input type=\"submit\" value=\"Login\" name=\"_action_validateUser\">"
 			out<< "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-			out<< "<input type=\"submit\" value=\"New User\" name=\"_action_createUser\">"
+			out<< "<input type=\"submit\" value=\"New User\" name=\"_action_createUserScreen\">"
 			out<< "</form>"
 		}
 	}

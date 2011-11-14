@@ -14,9 +14,41 @@ class LoginController {
 		chain(controller:"homescreen",action:"index")
 	}
 	
-	def createUser = { 
-		println 'hi'	
+	def createUserScreen = { 
+			
 	}
+	
+	def createUserMySQL = {
+		
+		//TODO: make sure fields are not blank
+		String usernameCheck = """select count(*) from Users where username='${params.Username}'"""
+		SqlLogic.SetStatement(usernameCheck)
+		ResultSet userExists = SqlLogic.ExecuteQuery()
+		if(userExists.next())
+		{
+			if(1==userExists.getInt(1))
+			{
+				//User already exists, prompt for new name
+				flash.message = "User already exists, please pick a different name"
+				userExists.close()
+				chain(action:createUserScreen)
+			}
+			else
+			{
+				userExists.close()
+				String createUser = """insert into Users values('${params.Username}',Password('${params.Password}'))"""
+				SqlLogic.SetStatement(createUser)
+				SqlLogic.ExecuteUpdate()
+				session.userName = params.Username
+				chain(controller:"homescreen",action:"index")
+			}
+		}
+		else
+		{
+			//TODO:error with sql
+		}
+	}
+	
 	
 	def validateUser = {
 		
