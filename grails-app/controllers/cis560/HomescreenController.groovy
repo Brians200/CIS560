@@ -1,5 +1,4 @@
 package cis560
-
 class HomescreenController {
 
 	/*def beforeInterceptor = [action:this.&auth]
@@ -15,6 +14,10 @@ class HomescreenController {
 	
     def index = { 
 		
+		if(session.userName!=null&&session.userName!="admin")
+		{
+			chain(controller:"portfolio",action:"index")
+		}
 		//MODEL TO BE PASSED TO homescreen/index.gsp
 		[userName:session.userName]		
     }
