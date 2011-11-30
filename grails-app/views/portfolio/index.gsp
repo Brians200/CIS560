@@ -11,8 +11,8 @@
 			</g:if>
 			<g:each in="${portfolios}" var="portfolio">
 				<p>
-					<g:link controller="portfolio" action="singlePortfolio" params="[portfolioName:portfolio]">
-						${portfolio}
+					<g:link controller="portfolio" action="singlePortfolio" params="[portfolioName:portfolio[0]]">
+						${portfolio[0]} - ${portfolio[1] }
 					</g:link>
 				</p>
 			</g:each>

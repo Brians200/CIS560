@@ -6,12 +6,12 @@ class PortfolioController {
 
 	//This is overview
     def index = { 
-		SqlLogic.SetStatement("SELECT pname FROM Portfolios WHERE username = '$session.userName'")
+		SqlLogic.SetStatement("SELECT pname,description FROM Portfolios WHERE username = '$session.userName'")
 		ResultSet portfolios = SqlLogic.ExecuteQuery()
 		def portfolioList = []
 		while(portfolios.next())
 		{
-			portfolioList.add(portfolios.getString(1))
+			portfolioList.add([portfolios.getString(1),portfolios.getString(2)])
 		}
 		
 		portfolios.close();
