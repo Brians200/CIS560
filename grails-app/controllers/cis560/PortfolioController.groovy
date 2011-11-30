@@ -33,4 +33,34 @@ class PortfolioController {
 	
 	
 	def create = { }
+	
+	def createPortfolioMySQL = {
+	
+		//TODO: make sure fields are not blank
+		String portfolionameCheck = """select count(*) from Portfolios where username='${session.userName}' and pname='${params.PortfolioName}'"""
+		SqlLogic.SetStatement(portfolionameCheck)
+		ResultSet portfolioExists = SqlLogic.ExecuteQuery()
+		if(portfolioExists.next())
+		{
+			if(1==portfolioExists.getInt(1))
+			{
+				//portfolio already exists, prompt for new name
+				flash.message = "A portfolio already exists, please pick a different name"
+				portfolioExists.close()
+				chain(action:create)
+			}
+			else
+			{
+				portfolioExists.close()
+				String createportfolio = """insert into Portfolios values('${session.userName}','${params.PortfolioName}','${params.PortfolioDescription}')"""
+				SqlLogic.SetStatement(createportfolio)
+				SqlLogic.ExecuteUpdate()
+				chain(action:"index")
+			}
+		}
+		else
+		{
+			//TODO:error with sql
+		}
+	}
 }

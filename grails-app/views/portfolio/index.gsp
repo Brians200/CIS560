@@ -17,6 +17,10 @@
 				</p>
 			</g:each>
 			
+			<g:form>
+				<g:actionSubmit value="New Portfolio" action="create"/>
+			</g:form>
+			
 		</div>
 	</body>
 </html>
