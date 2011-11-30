@@ -15,7 +15,7 @@ target/classes/cis560/UserController$_closure1.class
 target/classes/cis560/UserController.class
 target*
 web-app/*
-
+/bin
 web-app/WEB-INF/classes/cis560/LoginController$_closure2.class
 web-app/WEB-INF/classes/cis560/LoginController.class
 web-app/WEB-INF/classes/cis560/UserController.class
