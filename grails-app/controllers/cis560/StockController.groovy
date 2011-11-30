@@ -9,15 +9,25 @@ class StockController {
 		chain(controller:"stock",action:"viewStock")
 	}
 	
-	def transaction={ }
+	def transaction = { }
 	
-	def viewStock={
+	def updateChartDates = {
+		//TODO: ERROR on date checking
+		Date start = params.startDate
+		Date finish = params.finishDate
+		def graphstart = start.year.toString()+"_"+start.month.tostring()+"_"+start.day()
+		def graphfinish = finish.year.toString()+"_"+finish.month.tostring()+"_"+finish.day()
+		chain (action:viewStock, model:[start:start,finish:finish])
+	}
+	
+	
+	def viewStock = {
 		
-		def stockSymbol = "FCCY"
+		String stockSymbol = "FCCY"
 		def stockExchange = "NASDAQ"
 		if(params.stockSymbol!=null)
 		{
-			stockSymbol = params.stockSymbol
+			stockSymbol = params.stockSymbol.toUpperCase()
 			String exchangeQuery = """select ename from Stock where symbol='${params.stockSymbol}'""".toString()
 			SqlLogic.SetStatement(exchangeQuery)
 			ResultSet exchangeResult = SqlLogic.ExecuteQuery()
@@ -43,20 +53,50 @@ class StockController {
 		SqlLogic.ClearParameters();
 		SqlLogic.SetStringParameter(1,stockExchange)
 		SqlLogic.SetStringParameter(2,stockSymbol)
-		SqlLogic.SetStringParameter(3,"2011-06-1")
-		
+		//FIX THIS
+		def start = "2011-06-1"
+		def end = "2011-07-10"
+		if(chainModel != null && chainModel.start!=null)
+		{
+			start = chainModel.start
+		}
+		if(chainModel != null && chainModel.finish!=null)
+		{
+			end = chainModel.finish
+		}
+		SqlLogic.SetStringParameter(3,start)
 		ResultSet tableResult = SqlLogic.ExecuteQuery();
 		def tablep = []
 		def tablev = []
+		boolean x = true;
+		double p1
+		double p2
 		while(tableResult.next())
 		{
+			if (x == true)
+			{
+				p1 = tableResult.getDouble(2);
+				x = false;
+			}
+			p2 = tableResult.getDouble(2);
 			tablep.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(2)])
 			tablev.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(3)])
 		}
 		tableResult.close()
-
+		double pchange = (((p2-p1)/p1)*100)*100;
+		pchange = Math.ceil(pchange)/100;
+		boolean negative = false
+		if(pchange<0)
+		{
+			negative = true
+		}
+		String pcs;
+		if (negative)
+		{
+			pcs = "("+pchange+"%)"
+		}
+		pcs = "("+pchange+"%)"
 		//model to return
-		def f = [["'Yesterday'", 3],["'Today'", 1],["'Tomorrow'", 1],["'Future'", 1],["'Poop'", 2]]
-		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep]
+		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative]
 	}
 }

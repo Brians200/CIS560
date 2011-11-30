@@ -7,11 +7,12 @@
 // Load the Visualization API and the piechart package.      
 google.load('visualization', '1.0', {'packages':['corechart']});            
 // Set a callback to run when the Google Visualization API is loaded.      
-google.setOnLoadCallback(drawChart);            
+google.setOnLoadCallback(drawPriceChart);   
+google.setOnLoadCallback(drawVolumeChart);  
 // Callback that creates and populates a data table,       
 // instantiates the pie chart, passes in the data and      
 // draws it.      
-function drawChart() {      
+function drawPriceChart() {      
 // Create the data table.
 var data = new google.visualization.DataTable();      
 data.addColumn('string', 'Date');      
@@ -19,17 +20,38 @@ data.addColumn('number', 'Price');
 data.addRows(${Tablep});      
 // Set chart options     
 
- var options = {'title':'${Exchange}:${Symbol}','width':1024,'height':300,scaleType:'allmaximized' ,series: {0:{color: 'lime',type:"area", visibleInLegend: false}}};      
+ var options = {'title':'Price ${PChange}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: 'lime',type:"area", visibleInLegend: false}}};      
 // Instantiate and draw our chart, passing in some options.      
-var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));      
+var chart = new google.visualization.AreaChart(document.getElementById('price_chart_div'));      
 chart.draw(data, options);    
 }  
+
+function drawVolumeChart() {      
+	// Create the data table.
+	var data = new google.visualization.DataTable();      
+	data.addColumn('string', 'Date');      
+	data.addColumn('number', 'Volume');    
+	data.addRows(${Tablev});
+	// Set chart options     
+
+    var options = {'title':'Volume','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '#512888',type:"bars", visibleInLegend: false}}};      
+	// Instantiate and draw our chart, passing in some options.      
+	var chart = new google.visualization.AreaChart(document.getElementById('volume_chart_div'));      
+	chart.draw(data, options);    
+	}  
 </script>  
 </head>  
 <body>    
-<!--Div that will hold the Price chart-->  
-<div align="center">
-<div id="chart_div"></div> 
+<div align="left">
+	<br/>${Exchange}:${Symbol}<br/>
+	<g:form controller="stock">
+		<br/>Show Dates Between<br/>
+		<g:datePicker name="startDate" value="${new Date()}" precision="day" years="${2011}"/><br/>
+		<g:datePicker name="endDate" value="${new Date().minus(30)}" precision="day" years="${2011}"/><br/>
+		<g:actionSubmit value="Update" action="updateChartDates"/>
+	</g:form>
+	<div id="price_chart_div"></div> 
+	<div id="volume_chart_div"></div>
 </div>   
 
 
