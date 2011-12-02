@@ -42,6 +42,7 @@ class PortfolioController {
 	}
 	
 	
+	//This will remain blank, just a method to go to the create.gsp view
 	def create = { }
 	
 	def createPortfolioMySQL = {

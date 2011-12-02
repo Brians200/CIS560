@@ -3,9 +3,9 @@ import java.sql.*;
 import cis560.SqlLogic;
 class LoginController {
 
-	private static Connection connect = null;
-	
-    def login = { 
+
+	//blank method. just goes to the login.gsp view
+    	def login = { 
 
 	}
 	
@@ -14,6 +14,7 @@ class LoginController {
 		chain(controller:"homescreen",action:"index")
 	}
 	
+	//blank method. just goes to the login.gsp view
 	def createUserScreen = { 
 			
 	}

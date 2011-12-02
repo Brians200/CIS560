@@ -45,10 +45,12 @@ function drawVolumeChart() {
 <div align="left">
 	<br/>${Exchange}:${Symbol}<br/>
 	<g:form controller="stock">
-		<br/>Show Dates Between<br/>
-		<g:datePicker name="startDate" value="${new Date()}" precision="day" years="${2011}"/><br/>
-		<g:datePicker name="endDate" value="${new Date().minus(30)}" precision="day" years="${2011}"/><br/>
-		<g:actionSubmit value="Update" action="updateChartDates"/>
+		<div>
+			<br/>Show Dates Between<br/>
+			<span><g:datePicker name="startDate" value="${new Date()}" precision="day" years="${2011}"/></span>
+			<span><g:datePicker name="endDate" value="${new Date().minus(30)}" precision="day" years="${2011}"/></span>
+			<span><g:actionSubmit value="Update" action="updateChartDates"/></span>
+		</div>
 	</g:form>
 	<div id="price_chart_div"></div> 
 	<div id="volume_chart_div"></div>
