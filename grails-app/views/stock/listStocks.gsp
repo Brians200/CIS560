@@ -15,7 +15,7 @@
 				<g:each in="${symbols}" var="symbol">
 					<tr>
 						<td>
-							<g:link controller="stock" action="viewStock" params="[symbol:symbol,exchange:exchange]">
+							<g:link controller="stock" action="viewStock" params="[symbol:symbol[0],exchange:exchange]">
 								${symbol[0]}
 							</g:link>
 						</td>

@@ -60,7 +60,7 @@ class StockController {
 	
 	def viewStock = {
 		
-		String stockSymbol = "FCCY"
+		def stockSymbol = "FCCY"
 		def stockExchange = "NASDAQ"
 		if(params.symbol!=null&&params.exchange!=null)
 		{
@@ -90,11 +90,6 @@ class StockController {
 			stockSymbol = chainModel.Symbol
 			stockExchange = chainModel.Exchange
 		}
-		String loginStatement = "select tdate, adjclose, volume from History where ename=? and symbol=? and tdate>=? ;"
-		SqlLogic.SetStatement(loginStatement)
-		SqlLogic.ClearParameters();
-		SqlLogic.SetStringParameter(1,stockExchange)
-		SqlLogic.SetStringParameter(2,stockSymbol)
 		//FIX THIS
 		def start = "2011-06-1"
 		def end = "2011-07-10"
@@ -106,7 +101,8 @@ class StockController {
 		{
 			end = chainModel.finish
 		}
-		SqlLogic.SetStringParameter(3,start)
+		def loginStatement = "select tdate, adjclose, volume from History where ename='${stockExchange}' and symbol='${stockSymbol}' and tdate>='${start}' ;"
+		SqlLogic.SetStatement(loginStatement)
 		ResultSet tableResult = SqlLogic.ExecuteQuery();
 		def tablep = []
 		def tablev = []
