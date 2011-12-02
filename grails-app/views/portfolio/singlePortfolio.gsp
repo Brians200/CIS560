@@ -15,7 +15,13 @@
 			
 			<table>
 			<tr><td>Exchange</td>
-			<td>Stock</td></tr>          
+			<td>Stock</td>
+			<td>Date</td>
+			<td>Fee</td>
+			<td>Price</td>
+			<td>Type</td>
+			<td>Quantity</td>
+			</tr>          
 			<g:each in="${portfolioTrans}" var="Trans">
 				<tr>
 				
