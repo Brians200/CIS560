@@ -52,9 +52,17 @@ class StockController {
 		//TODO: ERROR on date checking
 		Date start = params.startDate
 		Date finish = params.finishDate
-		def graphstart = start.year.toString()+"_"+start.month.tostring()+"_"+start.day()
-		def graphfinish = finish.year.toString()+"_"+finish.month.tostring()+"_"+finish.day()
-		chain (action:viewStock, model:[start:start,finish:finish])
+		def graphStart = start.calendarDate.year.toString()+"-"+start.calendarDate.month.toString()+"-"+ start.calendarDate.dayOfMonth.toString();
+		def graphFinish = finish.calendarDate.year.toString()+"-"+finish.calendarDate.month.toString()+"-"+ finish.calendarDate.dayOfMonth.toString();
+		
+		if (finish<start)
+		{
+			flash.message = "Invalid Date Range"
+			
+		}
+		
+		
+		chain (action:viewStock, model:[start:graphStart,finish:graphFinish,dateStart:start,dateFinish:finish])
 	}
 	
 	
@@ -91,24 +99,33 @@ class StockController {
 			stockExchange = chainModel.Exchange
 		}
 		//FIX THIS
-		def start = "2011-06-1"
-		def end = "2011-07-10"
+			
+		Date today = new Date();
+		Date lastmo = today.minus(30);
+		def start = lastmo.calendarDate.year.toString()+"-"+lastmo.calendarDate.month.toString()+"-"+ lastmo.calendarDate.dayOfMonth.toString();
+		def finish = today.calendarDate.year.toString()+"-"+today.calendarDate.month.toString()+"-"+ today.calendarDate.dayOfMonth.toString();
+			
 		if(chainModel != null && chainModel.start!=null)
 		{
 			start = chainModel.start
+			lastmo = chainModel.dateStart
+			
 		}
 		if(chainModel != null && chainModel.finish!=null)
 		{
-			end = chainModel.finish
+			finish = chainModel.finish
+			today = chainModel.dateFinish
 		}
-		def loginStatement = "select tdate, adjclose, volume from History where ename='${stockExchange}' and symbol='${stockSymbol}' and tdate>='${start}' ;"
+		def loginStatement = """select tdate, adjclose, volume from History where ename='${stockExchange}' and symbol='${stockSymbol}' and tdate >='${start}' AND tdate <='${finish}' ;"""
 		SqlLogic.SetStatement(loginStatement)
 		ResultSet tableResult = SqlLogic.ExecuteQuery();
 		def tablep = []
 		def tablev = []
 		boolean x = true;
-		double p1
-		double p2
+		double p1 = 0;
+		double p2 = 0;
+		double ct = 0;
+		def avg = 0.0;
 		while(tableResult.next())
 		{
 			if (x == true)
@@ -119,8 +136,11 @@ class StockController {
 			p2 = tableResult.getDouble(2);
 			tablep.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(2)])
 			tablev.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(3)])
+			avg = avg + tableResult.getDouble(3);
+			ct++;
 		}
 		tableResult.close()
+		avg = avg/ct;
 		double pchange = (((p2-p1)/p1)*100)*100;
 		pchange = Math.ceil(pchange)/100;
 		boolean negative = false
@@ -134,7 +154,12 @@ class StockController {
 			pcs = "("+pchange+"%)"
 		}
 		pcs = "("+pchange+"%)"
+		
+		avg = avg*100
+		avg = Math.ceil(avg)
+		avg = avg/100
+		avg = (int)avg
 		//model to return
-		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative]
+		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg]
 	}
 }

@@ -34,7 +34,7 @@ function drawVolumeChart() {
 	data.addRows(${Tablev});
 	// Set chart options     
 
-    var options = {'title':'Volume','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '#512888',type:"bars", visibleInLegend: false}}};      
+    var options = {'title':'Volume ${AverageVolume}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '#512888',type:"bars", visibleInLegend: false}}};      
 	// Instantiate and draw our chart, passing in some options.      
 	var chart = new google.visualization.AreaChart(document.getElementById('volume_chart_div'));      
 	chart.draw(data, options);    
@@ -43,12 +43,13 @@ function drawVolumeChart() {
 </head>  
 <body>    
 <div align="left">
-	<br/>${Exchange}:${Symbol}<br/>
+	<h2>
+	${Exchange}:${Symbol}</h2>
 	<g:form controller="stock">
 		<div>
 			<br/>Show Dates Between<br/>
-			<span><g:datePicker name="startDate" value="${new Date()}" precision="day" years="${2011}"/></span>
-			<span><g:datePicker name="endDate" value="${new Date().minus(30)}" precision="day" years="${2011}"/></span>
+			<span><g:datePicker name="startDate" value="${datePickerStart}" precision="day" years="${2011}"/></span>
+			<span><g:datePicker name="finishDate" value="${datePickerFinish}" precision="day" years="${2011}"/></span>
 			<span><g:actionSubmit value="Update" action="updateChartDates"/></span>
 		</div>
 	</g:form>
