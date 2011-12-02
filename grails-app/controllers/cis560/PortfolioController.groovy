@@ -4,6 +4,16 @@ import java.sql.ResultSet
 
 class PortfolioController {
 
+	def beforeInterceptor = [action:this.&auth]
+	
+	def auth() {
+		if(!session.userName&&!session.userName.equals("admin")) {
+			flash.message = "You must be logged in to access portfolios"
+			redirect(controller:"login", action:"login")
+			return false
+		}
+	}
+	
 	//This is overview
     def index = { 
 		SqlLogic.SetStatement("SELECT pname,description FROM Portfolios WHERE username = '$session.userName'")
