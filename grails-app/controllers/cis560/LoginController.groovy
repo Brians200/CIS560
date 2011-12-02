@@ -82,11 +82,11 @@ class LoginController {
 			
 			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 			render("There is an error")
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 			render("There is an error")
 		}	

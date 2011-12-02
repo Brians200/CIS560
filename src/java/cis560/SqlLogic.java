@@ -14,10 +14,10 @@ public class SqlLogic {
 			connect = DriverManager.getConnection("jdbc:mysql://mysql.cis.ksu.edu/bsweeney","bsweeney", "a1b2c3d4e5");
 			connected = true;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -34,7 +34,7 @@ public class SqlLogic {
 		try {
 			resultSet = preparedStatement.executeQuery();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			System.out.println(preparedStatement.toString());
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class SqlLogic {
 		try {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -64,7 +64,7 @@ public class SqlLogic {
 		try {
 			preparedStatement.clearParameters();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -79,7 +79,7 @@ public class SqlLogic {
 		try {
 			preparedStatement = connect.prepareStatement(statement);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -94,7 +94,7 @@ public class SqlLogic {
 		try {
 			preparedStatement.setString(column, parameter);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TO1DO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
