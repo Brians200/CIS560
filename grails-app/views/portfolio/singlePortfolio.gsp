@@ -13,15 +13,23 @@
 			
 			${session.userName } 's ${portfolioName } portfolio 
 			
-			           
+			<table>
+			<tr><td>Exchange</td>
+			<td>Stock</td></tr>          
 			<g:each in="${portfolioTrans}" var="Trans">
-				<p>
-					
-					${Trans[0]} -  ${Trans[1]} - ${Trans[2]} - ${Trans[4]} - ${Trans[5]} - ${Trans[6]} - ${Trans[7]} 
+				<tr>
+				
+				<td>${Trans[0]}</td>
+				<td>${Trans[1]}</td>
+				<td>${Trans[2]}</td>
+				<td>${Trans[4]}</td>
+				<td> ${Trans[5]}</td>
+				<td>${Trans[6]}</td>
+				<td> ${Trans[7]}</td> 
 						
-				</p>
+				</tr>
 			</g:each>
-			
+			</table>
 		</div>
 	</body>
 </html>
