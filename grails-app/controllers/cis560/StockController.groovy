@@ -6,7 +6,44 @@ class StockController {
 
     def index = {
 		
-		chain(controller:"stock",action:"viewStock")
+		
+		chain(controller:"stock",action:"listExchanges")
+	}
+	
+	def listExchanges = {
+		String exchangesSqlString = """select ename from Exchange"""
+		SqlLogic.SetStatement(exchangesSqlString)
+		ResultSet exchangesResult = SqlLogic.ExecuteQuery()
+		
+		def exchanges = []
+		
+		while(exchangesResult.next())
+		{
+			exchanges.add(exchangesResult.getString(1))
+		}
+		exchangesResult.close()
+		[exchanges:exchanges]
+	}
+	
+	def listStocks = {
+		if (params.exchange ==null)
+		{
+			chain (controller:"stock", action:"listExhanges")
+		}
+		
+		String symbolsSqlString = """select symbol, cname, ipoyear, marketCap, industry, sector from Stock where ename='${params.exchange}'"""
+		SqlLogic.SetStatement(symbolsSqlString)
+		ResultSet symbolsResult = SqlLogic.ExecuteQuery()
+		
+		def symbols = []
+		
+		while(symbolsResult.next())
+		{
+			symbols.add([symbolsResult.getString(1),symbolsResult.getString(2),symbolsResult.getString(3),symbolsResult.getString(4),symbolsResult.getString(5),symbolsResult.getString(6)])
+		}
+		
+		symbolsResult.close()
+		[symbols:symbols,exchange:params.exchange]
 	}
 	
 	def transaction = { }
@@ -25,7 +62,12 @@ class StockController {
 		
 		String stockSymbol = "FCCY"
 		def stockExchange = "NASDAQ"
-		if(params.stockSymbol!=null)
+		if(params.symbol!=null&&params.exchange!=null)
+		{
+			stockSymbol = params.symbol
+			stockExchange = params.exchange
+		}
+		else if(params.stockSymbol!=null)
 		{
 			stockSymbol = params.stockSymbol.toUpperCase()
 			String exchangeQuery = """select ename from Stock where symbol='${params.stockSymbol}'""".toString()
