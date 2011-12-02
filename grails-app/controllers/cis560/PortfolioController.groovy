@@ -31,6 +31,27 @@ class PortfolioController {
 	
 	def delete = { }
 	
+	def createTransaction = {
+		//Here are your variables
+		//session.currentPortfolio
+		//params.Exchange
+		//params.Quantity
+		//params.Date
+		//params.Type
+		//params.Fee
+		//params.Price
+		//params.Symbol
+		
+		//WRITE CREATE TRANSACTION QUERY HERE
+		
+		
+		//WRITE OWNS UPDATE HERE
+		
+		
+		//Do not touch this
+		chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
+	}
+	
 	def singlePortfolio={
 		
 		// The portfolio they want to view is in this variable: params.portfolioName
@@ -40,8 +61,18 @@ class PortfolioController {
 		//This is a mapping of what you want to pass to the GSP, so pass in things you need to display
 		
 		
+		def portfolio = ""
+		if(chainModel!=null && chainModel.portfolio!=null)
+		{
+			portfolio = session.currentPortfolio
+		}
+		else
+		{
+			portfolio = params.portfolioName
+		}
+		
 		//This is a SQL statement for getting transactions for portfolios 
-		String getPortfolioTransactions = """SELECT  ename, symbol, tdate, fee, price, type, quantity FROM Transactions WHERE username = '${session.userName}' AND pname = '${params.portfolioName}'"""
+		String getPortfolioTransactions = """SELECT  ename, symbol, tdate, fee, price, type, quantity FROM Transactions WHERE username = '${session.userName}' AND pname = '${portfolio}'"""
 		SqlLogic.SetStatement(getPortfolioTransactions)
 		ResultSet portfolioTrans = SqlLogic.ExecuteQuery()
 		
@@ -55,12 +86,10 @@ class PortfolioController {
 		}
 		
 		portfolioTrans.close();
-		
-		[portfolioName:params.portfolioName,portfolioTrans:portfolioTransList]
-		
-		
-		
-		
+
+		session.currentPortfolio = params.portfolioName
+				
+		[portfolioName:portfolio,portfolioTrans:portfolioTransList]
 	}
 	
 	

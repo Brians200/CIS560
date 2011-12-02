@@ -90,7 +90,7 @@ class StockController {
 			stockSymbol = chainModel.Symbol
 			stockExchange = chainModel.Exchange
 		}
-		String loginStatement = "select tdate,adjclose,volume from History where ename=? and symbol=? and tdate>=? ;"
+		String loginStatement = "select tdate, adjclose, volume from History where ename=? and symbol=? and tdate>=? ;"
 		SqlLogic.SetStatement(loginStatement)
 		SqlLogic.ClearParameters();
 		SqlLogic.SetStringParameter(1,stockExchange)
