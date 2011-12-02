@@ -11,7 +11,16 @@
 			</g:if>
 			
 			
-			${session.userName } 's ${portfolioName } portfolio
+			${session.userName } 's ${portfolioName } portfolio 
+			
+			           
+			<g:each in="${portfolioTrans}" var="Trans">
+				<p>
+					
+					${Trans[0]} -  ${Trans[1]} - ${Trans[2]} - ${Trans[4]} - ${Trans[5]} - ${Trans[6]} - ${Trans[7]} 
+						
+				</p>
+			</g:each>
 			
 		</div>
 	</body>

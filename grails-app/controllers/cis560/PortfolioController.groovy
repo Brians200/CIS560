@@ -23,12 +23,34 @@ class PortfolioController {
 	
 	def singlePortfolio={
 		
-		// The portfolio they wanna view is in this variable: params.portfolioName
+		// The portfolio they want to view is in this variable: params.portfolioName
 		// The user's name is here: session.userName
 		
 		
 		//This is a mapping of what you want to pass to the GSP, so pass in things you need to display
-		[portfolioName:params.portfolioName]
+		
+		
+		//This is a SQL statement for getting transactions for portfolios 
+		String getPortfolioTransactions = """SELECT  ename, symbol, tdate, fee, price, type, quantity FROM Transactions WHERE username = '${session.userName}' AND pname = '${params.portfolioName}'"""
+		SqlLogic.SetStatement(getPortfolioTransactions)
+		ResultSet portfolioTrans = SqlLogic.ExecuteQuery()
+		
+		//Puts results from SQL query into an arrays
+		def portfolioTransList = []
+		String x;
+		while(portfolioTrans.next())
+		{
+			x = portfolioTrans.getString(1);
+			portfolioTransList.add([portfolioTrans.getString(1),portfolioTrans.getString(2),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6),portfolioTrans.getString(7)])
+		}
+		
+		portfolioTrans.close();
+		
+		[portfolioName:params.portfolioName,portfolioTrans:portfolioTransList]
+		
+		
+		
+		
 	}
 	
 	
