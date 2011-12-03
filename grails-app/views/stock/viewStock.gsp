@@ -34,7 +34,7 @@ function drawVolumeChart() {
 	data.addRows(${Tablev});
 	// Set chart options     
 
-    var options = {'title':'Volume ${AverageVolume}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '#512888',type:"bars", visibleInLegend: false}}};      
+    var options = {'title':'Volume Avg:${AverageVolume}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '#512888',type:"bars", visibleInLegend: false}}};      
 	// Instantiate and draw our chart, passing in some options.      
 	var chart = new google.visualization.AreaChart(document.getElementById('volume_chart_div'));      
 	chart.draw(data, options);    
