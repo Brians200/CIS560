@@ -43,11 +43,47 @@ class PortfolioController {
 		//params.Symbol
 		
 		//WRITE CREATE TRANSACTION QUERY HERE
-		
+		/*
+		String portfolionameCheck = """INSERT INTO Transactions
+        VALUES('${params.portfolio}', '${session.userName}','${params.Exchange}','${params.Symbol}','${params.Date}',
+        '${params.Fee}','{params.Price}','${params.Type}','${params.Quantity}')"""
+		SqlLogic.SetStatement(portfolionameCheck)
+		ResultSet portfolioExists = SqlLogic.ExecuteUpdate()
+		*/
 		
 		//WRITE OWNS UPDATE HERE
-		
-		
+		/*
+		//TODO: make sure fields are not blank
+		String transCheck = """SELECT count(*) FROM Owns WHERE username = '${session.userName}' AND pname ='${parms.PortfolioName}' AND symbol = '${params.Symbol}''"""
+		SqlLogic.SetStatement(transCheck)
+		ResultSet transExists = SqlLogic.ExecuteQuery()
+		if(transExists.next())
+		{
+			if(1==transExists.getInt(1))
+			{
+				//IF transaction exists, update that owns transaction 
+				
+				String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${parms.PortfolioName}'AND symbol = '${params.Symbol}'"""
+				SqlLogic.SetStatement(updateOwnsTrans)
+				SqlLogic.ExecuteUpdate()
+				transExists.close()
+				chain(action:create)
+			}
+			else
+			{
+				//Create a new owns transaction. 
+				transExists.close()
+				String createOwnsTrans = """INSERT INTO Owns VALUES('${parms.PortfolioName}', '${session.userName}','${params.Exchange}','${params.Symbol}','${params.Quantity}')"""
+				SqlLogic.SetStatement(createOwnsTrans)
+				SqlLogic.ExecuteQuery()
+				chain(action:"index")
+			}
+		}
+		else
+		{
+			//TODO:error with sql
+		}
+		*/
 		//Do not touch this
 		chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
 	}
