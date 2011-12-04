@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="main" />
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 </head>
 <body>
 	<div class="loginPadding">
@@ -13,7 +14,12 @@
 
 		${session.userName }'s
 		${portfolioName }
-
+		
+		<% 
+   def Columns = [['string', 'Exchange'], ['string', 'Stock'],['string', 'Date'],['string', 'Fee'],['string', 'Price'],['string', 'Type'],['string', 'Quantity']]
+%><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 
+ columns="${Columns}" data="${portfolioTrans}" />
+<div id="table_div"></div>
 		
 		<table>
 			<tr>

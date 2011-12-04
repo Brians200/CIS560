@@ -15,14 +15,9 @@
 <% 
    def Columns = [['string', 'Symbol'], ['string', 'Company Name'],['string', 'IPO Year'],['string', 'Market Capacity'],['string', 'Industry'],['string', 'Sector']]
 %><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 
- columns="${Columns}" data="${symbols}" select="selectHandler" />
+ columns="${Columns}" data="${symbols}" />
 <div id="table_div"></div>
-<script type="text/javascript">
-   function selectHandler(e) {
-      var row = table_div.getSelection()[0].row;
-      alert('You selected ' + ${symbols}.getValue(row, 0));
-   }
-</script>
+
 		<!--	<table>
 				<g:each in="${symbols}" var="symbol">
 					<tr>

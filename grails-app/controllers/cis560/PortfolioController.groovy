@@ -92,6 +92,7 @@ class PortfolioController {
 		chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
 	}
 	
+	
 	def singlePortfolio={
 		
 		// The portfolio they want to view is in this variable: params.portfolioName
