@@ -126,6 +126,8 @@ class PortfolioController {
 			portfolioTransList.add([portfolioTrans.getString(1),createSymbolLink(portfolioTrans.getString(2),portfolioTrans.getString(1)),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
 		}
 		
+		portfolioTransList.add(createTransactionBoxes())
+		
 		portfolioTrans.close();
 
 		session.currentPortfolio = portfolio
@@ -136,6 +138,23 @@ class PortfolioController {
 	String createSymbolLink(String symbol,String exchange)
 	{
 		"""<a href="/cis560/stock/viewStock?symbol=${symbol}&amp;exchange=${exchange}">${symbol}</a>"""
+	}
+	
+	def createTransactionBoxes()
+	{
+		[
+		"""<input type="text" class="transactionCreate" name="Exchange" id="Exchange" value="" />"""
+		,"""<input type="text" class="transactionCreate" name="Symbol" id="Symbol" value="" />"""
+		,"""<input type="text" class="transactionCreate" name="Date" id="Date" value="" />"""
+		,"""<input type="text" class="transactionCreate" name="Fee" id="Fee" value="" />"""
+
+		,"""<input type="text" class="transactionCreate" name="Price" id="Price" value="" />"""
+
+		,"""Buy <input type="radio" name="Type" checked="checked" value="buy" />Sell <input type="radio" name="Type" value="sell" />"""
+
+		
+		,"""<input type="text" class="transactionCreate" name="Quantity" id="Quantity" value="" />"""]
+
 	}
 	
 	//This will remain blank, just a method to go to the create.gsp view

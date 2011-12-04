@@ -19,63 +19,10 @@
    def Columns = [['string', 'Exchange'], ['string', 'Stock'],['string', 'Date'],['string', 'Fee'],['string', 'Price'],['string', 'Type'],['string', 'Quantity']]
 %><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 
  columns="${Columns}" data="${portfolioTrans}" />
-<div id="table_div"></div>
+		<form action="/cis560/portfolio/index" method="post" >
+			<div id="table_div"></div>
+		<input type="submit" name="_action_createTransaction" value="Create" /></form>
 		
-		<table>
-			<tr>
-				<td>Exchange</td>
-				<td>Stock</td>
-				<td>Date</td>
-				<td>Fee</td>
-				<td>Price</td>
-				<td>Type</td>
-				<td>Quantity</td>
-			</tr>
-			<tr>
-				<g:form>
-					<td><g:textField class="transactionCreate" name="Exchange" /></td>
-					<td><g:textField class="transactionCreate" name="Symbol" /></td>
-					<td><g:textField class="transactionCreate" name="Date" /></td>
-					<td><g:textField class="transactionCreate" name="Fee" /></td>
-					<td><g:textField class="transactionCreate" name="Price" /></td>
-					<td>
-						<g:radioGroup labels="['Buy','Sell']" values="['buy','sell']" name="Type" value='buy'>${it.label} ${it.radio}</g:radioGroup>
-					</td>
-					<td><g:textField class="transactionCreate" name="Quantity" /></td>
-					<td><g:actionSubmit value="Create" action="createTransaction"/></td>
-				</g:form>
-			</tr>
-			<g:each in="${portfolioTrans}" var="Trans">
-				<tr>
-
-					<td>
-						${Trans[0]}
-					</td>
-					<td>
-						${Trans[1]}
-					</td>
-					<td>
-						${Trans[2]}
-					</td>
-					<td>
-						${Trans[3]}
-					</td>
-					<td>
-						${Trans[4]}
-					</td>
-					<td>
-						${Trans[5]}
-					</td>
-					<td>
-						${Trans[6]}
-					</td>
-					<td>
-						${Trans[7]}
-					</td>
-
-				</tr>
-			</g:each>
-		</table>
 	</div>
 </body>
 </html>
