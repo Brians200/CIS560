@@ -62,7 +62,7 @@ class PortfolioController {
 		{
 			
 				//IF transaction exists, update that owns transaction 
-				if(${params.Fee} == 'b')
+				if(${params.Type}.equals("buy"))
 				{
 			
 					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""

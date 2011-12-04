@@ -32,7 +32,9 @@
 					<td><g:textField class="transactionCreate" name="Date" /></td>
 					<td><g:textField class="transactionCreate" name="Fee" /></td>
 					<td><g:textField class="transactionCreate" name="Price" /></td>
-					<td><g:textField class="transactionCreate" name="Type" /></td>
+					<td>
+						<g:radioGroup labels="['Buy','Sell']" values="['buy','sell']" name="Type" value='buy'>${it.label} ${it.radio}</g:radioGroup>
+					</td>
 					<td><g:textField class="transactionCreate" name="Quantity" /></td>
 					<td><g:actionSubmit value="Create" action="createTransaction"/></td>
 				</g:form>
