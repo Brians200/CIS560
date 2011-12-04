@@ -119,7 +119,7 @@ class PortfolioController {
 		
 		portfolioTrans.close();
 
-		session.currentPortfolio = params.portfolioName
+		session.currentPortfolio = portfolio
 				
 		[portfolioName:portfolio,portfolioTrans:portfolioTransList]
 	}
