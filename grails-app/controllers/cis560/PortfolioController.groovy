@@ -122,7 +122,7 @@ class PortfolioController {
 		while(portfolioTrans.next())
 		{
 			
-			portfolioTransList.add([portfolioTrans.getString(1),portfolioTrans.getString(2),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
+			portfolioTransList.add([portfolioTrans.getString(1),createSymbolLink(portfolioTrans.getString(2),portfolioTrans.getString(1)),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
 		}
 		
 		portfolioTrans.close();
@@ -132,6 +132,10 @@ class PortfolioController {
 		[portfolioName:portfolio,portfolioTrans:portfolioTransList]
 	}
 	
+	String createSymbolLink(String symbol,String exchange)
+	{
+		"""<a href="/cis560/stock/viewStock?symbol=${symbol}&amp;exchange=${exchange}">${symbol}</a>"""
+	}
 	
 	//This will remain blank, just a method to go to the create.gsp view
 	def create = { }
