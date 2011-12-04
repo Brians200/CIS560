@@ -39,11 +39,16 @@ class StockController {
 		
 		while(symbolsResult.next())
 		{
-			symbols.add([symbolsResult.getString(1),symbolsResult.getString(2),symbolsResult.getString(3),symbolsResult.getString(4),symbolsResult.getString(5),symbolsResult.getString(6)])
+			symbols.add([createLink(symbolsResult.getString(1),params.exchange),symbolsResult.getString(2),symbolsResult.getString(3),symbolsResult.getString(4),symbolsResult.getString(5),symbolsResult.getString(6)])
 		}
 		
 		symbolsResult.close()
 		[symbols:symbols,exchange:params.exchange]
+	}
+	
+	String createLink(String symbol,String exchange)
+	{
+		"""<a href="/cis560/stock/viewStock?symbol=${symbol}&amp;exchange=${exchange}">${symbol}</a>"""
 	}
 	
 	def transaction = { }
