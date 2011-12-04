@@ -33,14 +33,14 @@ class PortfolioController {
 	
 	def createTransaction = {
 		//Here are your variables
-		session.currentPortfolio
-		params.Exchange
-		params.Quantity
-		params.Date
-		params.Type
-		params.Fee
-		params.Price
-		params.Symbol
+		//session.currentPortfolio
+		//params.Exchange
+		//params.Quantity
+		//params.Date
+		//params.Type
+		//params.Fee
+		//params.Price
+		//params.Symbol
 		
 		//WRITE CREATE TRANSACTION QUERY HERE
 		
@@ -62,10 +62,21 @@ class PortfolioController {
 		{
 			
 				//IF transaction exists, update that owns transaction 
-				
-				String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
-				SqlLogic.SetStatement(updateOwnsTrans)
-				SqlLogic.ExecuteUpdate()
+				if(${params.Fee} == 'b')
+				{
+			
+					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					SqlLogic.SetStatement(updateOwnsTrans)
+					SqlLogic.ExecuteUpdate()
+				}
+				else
+				{
+					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					SqlLogic.SetStatement(updateOwnsTrans)
+					SqlLogic.ExecuteUpdate()
+					
+				}
+					
 				
 				
 		}
