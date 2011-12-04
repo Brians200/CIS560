@@ -44,10 +44,7 @@ class PortfolioController {
 		
 		//WRITE CREATE TRANSACTION QUERY HERE
 		
-		String portfolionameCheck = """INSERT INTO Transactions
-        VALUES('${session.currentPortfolio}','${session.userName}','${params.Exchange}',
-        '${params.Symbol}','${params.Date}','${params.Fee}','${params.Price}','${params.Type}'
-        ,'${params.Quantity}')"""
+		String portfolionameCheck = """INSERT INTO Transactions VALUES('${session.currentPortfolio}','${session.userName}','${params.Exchange}', '${params.Symbol}','${params.Date}','${params.Fee}','${params.Price}','${params.Type.equals("buy")?'b':'s'}' ,'${params.Quantity}')"""
 		SqlLogic.SetStatement(portfolionameCheck)
 		ResultSet portfolioExists = SqlLogic.ExecuteUpdate()
 		
@@ -62,7 +59,7 @@ class PortfolioController {
 		{
 			
 				//IF transaction exists, update that owns transaction 
-				if(${params.Type}.equals("buy"))
+				if(	params.Type.equals("buy"))
 				{
 			
 					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
@@ -125,7 +122,7 @@ class PortfolioController {
 		while(portfolioTrans.next())
 		{
 			
-			portfolioTransList.add([portfolioTrans.getString(1),portfolioTrans.getString(2),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6),portfolioTrans.getString(7)])
+			portfolioTransList.add([portfolioTrans.getString(1),portfolioTrans.getString(2),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
 		}
 		
 		portfolioTrans.close();
