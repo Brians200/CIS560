@@ -165,4 +165,9 @@ class PortfolioController {
 			//TODO:error with sql
 		}
 	}
+	
+	def viewOwns = {
+		
+		
+	}
 }
