@@ -14,7 +14,7 @@
 		<% 
   			 def Columns = [['string', 'Exchange'], ['string', 'Symbol'],['string', 'Quantity']]
 		%>
-		<gvisualization:table elementId="table_div" allowHtml="${true}"
+		<gvisualization:table elementId="table_div" width="${300}" allowHtml="${true}"
 			showRowNumber="${false}" columns="${Columns}"
 			data="${ownershipList}" />
 			<div id="table_div"></div>
