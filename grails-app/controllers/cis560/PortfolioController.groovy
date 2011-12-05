@@ -141,9 +141,11 @@ class PortfolioController {
 		
 		while(portfolioTrans.next())
 		{
-			
-			portfolioTransList.add([portfolioTrans.getString(1),createSymbolLink(portfolioTrans.getString(2),portfolioTrans.getString(1)),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
+			def nameid = """${portfolioTrans.getString(1)};${portfolioTrans.getString(2)};${portfolioTrans.getString(3)};${portfolioTrans.getString(4)};${portfolioTrans.getString(5)};${portfolioTrans.getString(6)};${portfolioTrans.getString(7)}"""
+			def checkbox = """<input name="_${nameid}" type="hidden"><input name="${nameid}" id="${nameid}" type="checkbox">"""
+			portfolioTransList.add([checkbox,portfolioTrans.getString(1),createSymbolLink(portfolioTrans.getString(2),portfolioTrans.getString(1)),portfolioTrans.getString(3),portfolioTrans.getString(4), portfolioTrans.getString(5),portfolioTrans.getString(6).equals('b')?"buy":"sell",portfolioTrans.getString(7)])
 		}
+		
 		
 		portfolioTransList.add(createTransactionBoxes())
 		
@@ -161,7 +163,7 @@ class PortfolioController {
 	
 	def createTransactionBoxes()
 	{
-		[
+		["",
 		"""<input type="text" class="transactionCreate" name="Exchange" id="Exchange" value="" />"""
 		,"""<input type="text" class="transactionCreate" name="Symbol" id="Symbol" value="" />"""
 		,"""<input type="text" class="transactionCreate" name="Date" id="Date" value="" />"""
@@ -178,6 +180,23 @@ class PortfolioController {
 	
 	//This will remain blank, just a method to go to the create.gsp view
 	def create = { }
+	
+	def deleteTransactions = {
+		for(def a:params)
+		{
+			if( a.value.equals("on"))
+			{
+				def stockToDelete = a.key
+				def stockList=stockToDelete.split(";")
+				//pname 	username 	ename 	symbol 	tdate 	fee 	price 	type 	quantity
+				def deleteSqlString = """Delete from Transactions where pname='${params.portfolioName}' and username='${session.userName}' and ename='${stockList[0]}' and symbol='${stockList[1]}' and tdate='${stockList[2]}' and fee='${stockList[3]}' and price='${stockList[4]}' and type='${stockList[5]}' and quantity='${stockList[6]}'"""
+				SqlLogic.SetStatement(deleteSqlString)
+				SqlLogic.ExecuteUpdate()
+				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
+				
+			}
+		}
+	}
 	
 	def createPortfolioMySQL = {
 	
