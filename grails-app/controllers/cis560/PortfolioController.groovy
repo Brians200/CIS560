@@ -199,7 +199,7 @@ class PortfolioController {
 				
 				def findOwnsQuantity = """SELECT sum(quantity) FROM Transactions WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
 				
-				SqlLogic.SetStatement(deleteSqlString)
+			SqlLogic.SetStatement(findOwnsQuantity)
 				ResultSet result = SqlLogic.ExecuteQuery()
 				def quantity
 				if(result.next())
@@ -207,13 +207,13 @@ class PortfolioController {
 					
 					quantitynew=result.getString(1)
 					def upadateOwnsQuantity = """UPDATE Owns SET quantity=${quantitynew} WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
-					SqlLogic.SetStatement(updateOwnsQuantity)
+					SqlLogic.SetStatement(upadateOwnsQuantity)
 					SqlLogic.ExecuteUpdate()
 				}
 				result.close()
 				
 				def deleteOwnsQuantity = """Delete from Owns Where quantity <= 0;"""
-				SqlLogic.SetStatement(updateOwnsQuantity)
+				SqlLogic.SetStatement(deleteOwnsQuantity)
 				SqlLogic.ExecuteUpdate()
 				
 				
