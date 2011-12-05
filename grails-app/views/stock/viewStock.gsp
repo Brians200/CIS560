@@ -57,7 +57,7 @@ function drawVolumeChart() {
 	<div class="graphs" id="volume_chart_div"></div>
 			<h2>Historical Data:</h2>
 		<% 
-  			 def Columns = [['string', 'Date'], ['string', 'Close'],['string', 'Volume'],['string', 'High'],['string', 'Low'],['string', 'End of Day']]
+  			 def Columns = [['string', 'Date'], ['number', 'Close'],['number', 'Volume'],['number', 'High'],['number', 'Low'],['number', 'End of Day']]
 		%>
 		<gvisualization:table elementId="table_div" width="${768}" allowHtml="${true}" 
 			showRowNumber="${false}" columns="${Columns}"
