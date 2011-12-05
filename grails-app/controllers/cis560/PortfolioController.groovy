@@ -191,7 +191,7 @@ class PortfolioController {
 	}
 	
 	def viewOwns = {
-		String ownershipString = """select ename, symbol, quantity from Owns where username='${session.userName}'"""
+		String ownershipString = """SELECT ename,symbol,sum(quantity) FROM `Owns` WHERE username='${session.userName}' Group By symbol"""
 		SqlLogic.SetStatement(ownershipString)
 		ResultSet ownershipResult = SqlLogic.ExecuteQuery()
 		
