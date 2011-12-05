@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main" />
+		<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 	</head>
 	<body>
 		<div class="loginPadding">
@@ -9,18 +10,15 @@
 					${flash.message}
 				</div>
 			</g:if>
-			<g:each in="${portfolios}" var="portfolio">
-				<p>
-					<g:link controller="portfolio" action="singlePortfolio" params="[portfolioName:portfolio[0]]">
-						${portfolio[0]} - ${portfolio[1]}
-					</g:link>
-				</p>
-			</g:each>
+			<% 
+			   def Columns = [['string', 'Select'], ['string', 'Portfolio Name'],['string', 'Descripton']]
+			%><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 
+			 columns="${Columns}" data="${portfolio}" />
+			<div id="table_div"></div>
 			
 			<g:form>
 				<g:actionSubmit value="New Portfolio" action="create"/>
 			</g:form>
-			
 		</div>
 	</body>
 </html>
