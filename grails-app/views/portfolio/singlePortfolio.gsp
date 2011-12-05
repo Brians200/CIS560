@@ -12,8 +12,8 @@
 		</g:if>
 
 
-		${session.userName }'s
-		${portfolioName }
+		
+		<h2>Portfolio: ${portfolioName }</h2>
 		
 		<% 
    def Columns = [['string', 'Exchange'], ['string', 'Stock'],['string', 'Date'],['string', 'Fee'],['string', 'Price'],['string', 'Type'],['string', 'Quantity']]
