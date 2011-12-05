@@ -230,6 +230,27 @@ class PortfolioController {
 				def deleteSqlString = """Delete from Transactions where pname='${params.portfolioName}' and username='${session.userName}' and ename='${stockList[0]}' and symbol='${stockList[1]}' and tdate='${stockList[2]}' and fee='${stockList[3]}' and price='${stockList[4]}' and type='${stockList[5]}' and quantity='${stockList[6]}'"""
 				SqlLogic.SetStatement(deleteSqlString)
 				SqlLogic.ExecuteUpdate()
+				
+				def findOwnsQuantity = """SELECT sum(quantity) FROM Transactions WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
+				
+			SqlLogic.SetStatement(findOwnsQuantity)
+				ResultSet result = SqlLogic.ExecuteQuery()
+				def quantity
+				if(result.next())
+				{
+					
+					quantitynew=result.getString(1)
+					def upadateOwnsQuantity = """UPDATE Owns SET quantity=${quantitynew} WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
+					SqlLogic.SetStatement(upadateOwnsQuantity)
+					SqlLogic.ExecuteUpdate()
+				}
+				result.close()
+				
+				def deleteOwnsQuantity = """Delete from Owns Where quantity <= 0;"""
+				SqlLogic.SetStatement(deleteOwnsQuantity)
+				SqlLogic.ExecuteUpdate()
+				
+				
 				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
 				
 			}
