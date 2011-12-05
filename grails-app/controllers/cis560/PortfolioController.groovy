@@ -78,7 +78,7 @@ class PortfolioController {
 					{
 					
 						int currentQuan = currentQuantity.getInt(1)
-						int sellQuantity = params.Quantity
+						int sellQuantity = params.int('Quantity')
 						
 						if(currentQuan - sellQuantity > 0)
 						{
