@@ -191,7 +191,15 @@ class PortfolioController {
 	}
 	
 	def viewOwns = {
+		String ownershipString = """select ename, symbol, quantity from Owns where username='${session.userName}'"""
+		SqlLogic.SetStatement(ownershipString)
+		ResultSet ownershipResult = SqlLogic.ExecuteQuery()
 		
-		
+		def ownershipList = []
+		while(ownershipResult.next())
+		{
+			ownershipList.add([ownershipResult.getString(1),ownershipResult.getString(2),ownershipResult.getString(3)])
+		}
+		[ownershipList:ownershipList]
 	}
 }

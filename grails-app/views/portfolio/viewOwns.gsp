@@ -9,8 +9,11 @@
 					${flash.message}
 				</div>
 			</g:if>
+			<h2>You currently own:</h2>
 			
-
+			${ownershipList}
+			
+			
 		</div>
 	</body>
 </html>
