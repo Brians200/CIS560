@@ -121,11 +121,12 @@ class StockController {
 			finish = chainModel.finish
 			today = chainModel.dateFinish
 		}
-		def loginStatement = """select tdate, adjclose, volume from History where ename='${stockExchange}' and symbol='${stockSymbol}' and tdate >='${start}' AND tdate <='${finish}' ;"""
+		def loginStatement = """select tdate, adjclose,volume, high, low, eod from History where ename='${stockExchange}' and symbol='${stockSymbol}' and tdate >='${start}' AND tdate <='${finish}' ;"""
 		SqlLogic.SetStatement(loginStatement)
 		ResultSet tableResult = SqlLogic.ExecuteQuery();
 		def tablep = []
 		def tablev = []
+		def tablet = []
 		boolean x = true;
 		double p1 = 0;
 		double p2 = 0;
@@ -141,6 +142,7 @@ class StockController {
 			p2 = tableResult.getDouble(2);
 			tablep.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(2)])
 			tablev.add(["'"+tableResult.getString(1)+"'",tableResult.getDouble(3)])
+			tablet.add([tableResult.getString(1),tableResult.getDouble(2),tableResult.getDouble(3),tableResult.getDouble(4),tableResult.getDouble(5),tableResult.getDouble(6)])
 			avg = avg + tableResult.getDouble(3);
 			ct++;
 		}
@@ -165,6 +167,6 @@ class StockController {
 		avg = avg/100
 		avg = (int)avg
 		//model to return
-		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg]
+		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
 	}
 }

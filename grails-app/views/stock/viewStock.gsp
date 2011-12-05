@@ -42,7 +42,7 @@ function drawVolumeChart() {
 </script>  
 </head>  
 <body>    
-<div align="left">
+<div align="center">
 	<h2>
 	${Exchange}:${Symbol}</h2>
 	<g:form controller="stock">
@@ -53,8 +53,16 @@ function drawVolumeChart() {
 			<span><g:actionSubmit value="Update" action="updateChartDates"/></span>
 		</div>
 	</g:form>
-	<div id="price_chart_div"></div> 
-	<div id="volume_chart_div"></div>
+	<div class="graphs" id="price_chart_div"></div> 
+	<div class="graphs" id="volume_chart_div"></div>
+			<h2>Historical Data:</h2>
+		<% 
+  			 def Columns = [['string', 'Date'], ['string', 'Close'],['string', 'Volume'],['string', 'High'],['string', 'Low'],['string', 'End of Day']]
+		%>
+		<gvisualization:table elementId="table_div" width="${768}" allowHtml="${true}" 
+			showRowNumber="${false}" columns="${Columns}"
+			data="${Tablet}" />
+			<div id="table_div"></div>
 </div>   
 
 
