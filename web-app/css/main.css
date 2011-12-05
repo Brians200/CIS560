@@ -337,3 +337,10 @@ a:link.linksToControllers, a:visited.linksToControllers, a:hover.linksToControll
 .transactionCreate{
 	width:97%;
 }
+
+.graphs
+{
+	border-width: .2em;
+	border-style: dotted;
+	border-color: #CCC; 
+}
