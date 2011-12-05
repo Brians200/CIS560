@@ -1,6 +1,7 @@
 package cis560;
 import java.sql.*;
-public class SqlLogic {
+public class SqlLogic
+{
 	
 	private static boolean connected = false;
 	private static Connection connect = null;

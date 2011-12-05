@@ -21,12 +21,46 @@ class PortfolioController {
 		def portfolioList = []
 		while(portfolios.next())
 		{
-			portfolioList.add([portfolios.getString(1),portfolios.getString(2)])
+			def nameid = """${portfolios.getString(1)}"""
+			def checkbox = """<input name="_${nameid}" type="hidden"><input name="${nameid}" id="${nameid}" type="checkbox">"""
+			
+			portfolioList.add([checkbox,createPortfolioLink(portfolios.getString(1)),portfolios.getString(2)])
 		}
 		
 		portfolios.close();
 		
 		[portfolios:portfolioList]
+	}
+	
+	def createPortfolioLink(String pname)
+	{
+		return """<a href="http://localhost:8080/cis560/portfolio/singlePortfolio?portfolioName=${pname}">${pname}</a>"""
+	}
+	
+	def deletePortfolio = {
+		for(def a:params)
+		{
+			if( a.value.equals("on"))
+			{
+				def portfolioToDelete = a.key
+				//pname 	
+				def deleteSqlString = """Delete from Transactions where username='${session.userName}' and pname='${a.key}'"""
+				SqlLogic.SetStatement(deleteSqlString)
+				SqlLogic.ExecuteUpdate()
+				
+				def deleteOwns = """Delete from Owns where username='${session.userName}' and pname='${a.key}'"""
+				SqlLogic.SetStatement(deleteOwns)
+				SqlLogic.ExecuteUpdate()
+				
+				
+				def deletePortfolio = """Delete from Portfolios where username='${session.userName}' and pname='${a.key}'"""
+				SqlLogic.SetStatement(deletePortfolio)
+				SqlLogic.ExecuteUpdate()
+				
+				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
+				
+			}
+		}
 	}
 	
 	def delete = { }
@@ -181,7 +215,7 @@ class PortfolioController {
 		,"""<input type="text" class="transactionCreate" name="Quantity" id="Quantity" value="" />"""]
 
 	}
-	
+
 	//This will remain blank, just a method to go to the create.gsp view
 	def create = { }
 	
