@@ -62,7 +62,8 @@ class PortfolioController {
 				if(	params.Type.equals("buy"))
 				{
 			
-					String updateOwnsTrans = """SELECT quantity FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					
 					SqlLogic.SetStatement(updateOwnsTrans)
 					SqlLogic.ExecuteUpdate()
 				
@@ -70,7 +71,7 @@ class PortfolioController {
 				else
 				{
 					//Get current quantity. 
-					String getQuantity = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					String getQuantity = """SELECT quantity FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
 					SqlLogic.SetStatement(getQuantity)
 					ResultSet currentQuantity = SqlLogic.ExecuteQuery()
 					
