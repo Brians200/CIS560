@@ -198,7 +198,7 @@ class PortfolioController {
 		def ownershipList = []
 		while(ownershipResult.next())
 		{
-			ownershipList.add([ownershipResult.getString(1),ownershipResult.getString(2),ownershipResult.getString(3)])
+			ownershipList.add([ownershipResult.getString(1),createSymbolLink(ownershipResult.getString(2),ownershipResult.getString(1)),ownershipResult.getString(3)])
 		}
 		[ownershipList:ownershipList]
 	}
