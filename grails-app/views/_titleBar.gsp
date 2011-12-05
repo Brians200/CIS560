@@ -1,6 +1,6 @@
 <div class="titlebar">
 	<div id="topHeader">
-		<span id="titleText"> Stocks and Stuff </span> <span id="loginboxes">
+		<span id="titleText"> Stocks  </span> <span id="loginboxes">
 			<g:loginHeader />
 		</span>
 	</div>
