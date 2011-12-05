@@ -20,6 +20,9 @@
 %><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 
  columns="${Columns}" data="${portfolioTrans}" />
 		<form action="/cis560/portfolio/index" method="post" >
+			<div style="display: none;">
+  				<g:textField name="portfolioName" value="${portfolioName }"/>
+			</div>
 			<div id="table_div"></div>
 		<input type="submit" name="_action_createTransaction" value="Create" />
 		<input type="submit" name="_action_deleteTransactions" value="Delete"/></form>

@@ -184,7 +184,17 @@ class PortfolioController {
 	def deleteTransactions = {
 		for(def a:params)
 		{
-			print a
+			if( a.value.equals("on"))
+			{
+				def stockToDelete = a.key
+				def stockList=stockToDelete.split(";")
+				//pname 	username 	ename 	symbol 	tdate 	fee 	price 	type 	quantity
+				def deleteSqlString = """Delete from Transactions where pname='${params.portfolioName}' and username='${session.userName}' and ename='${stockList[0]}' and symbol='${stockList[1]}' and tdate='${stockList[2]}' and fee='${stockList[3]}' and price='${stockList[4]}' and type='${stockList[5]}' and quantity='${stockList[6]}'"""
+				SqlLogic.SetStatement(deleteSqlString)
+				SqlLogic.ExecuteUpdate()
+				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
+				
+			}
 		}
 	}
 	
