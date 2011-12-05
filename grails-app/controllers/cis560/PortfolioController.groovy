@@ -63,14 +63,33 @@ class PortfolioController {
 				{
 			
 					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					
 					SqlLogic.SetStatement(updateOwnsTrans)
 					SqlLogic.ExecuteUpdate()
+				
 				}
 				else
 				{
-					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
-					SqlLogic.SetStatement(updateOwnsTrans)
-					SqlLogic.ExecuteUpdate()
+					//Get current quantity. 
+					String getQuantity = """SELECT quantity FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+					SqlLogic.SetStatement(getQuantity)
+					ResultSet currentQuantity = SqlLogic.ExecuteQuery()
+					
+					
+					if(currentQuantity - ${params.Quantity} > 0)
+					{
+					//Update quantity 
+						String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+						SqlLogic.SetStatement(updateOwnsTrans)
+						SqlLogic.ExecuteUpdate()
+					}
+					else
+					{
+						//Delete Transaction with quantity 
+						String deleteOwnsTrans = """DELETE FROM Owns WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+						SqlLogic.SetStatement(deleteOwnsTrans)
+						SqlLogic.ExecuteUpdate()
+					}
 					
 				}
 					
