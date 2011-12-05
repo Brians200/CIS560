@@ -12,7 +12,7 @@
 		</g:if>
 		<h2>You currently own:</h2>
 		<% 
-  			 def Columns = [['string', 'Exchange'], ['string', 'Symbol'],['string', 'Date']]
+  			 def Columns = [['string', 'Exchange'], ['string', 'Symbol'],['string', 'Quantity']]
 		%>
 		<gvisualization:table elementId="table_div" allowHtml="${true}"
 			showRowNumber="${false}" columns="${Columns}"
