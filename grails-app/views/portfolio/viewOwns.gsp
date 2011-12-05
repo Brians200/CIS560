@@ -17,13 +17,7 @@
 		<gvisualization:table elementId="table_div" allowHtml="${true}"
 			showRowNumber="${false}" columns="${Columns}"
 			data="${ownershipList}" />
-		<form action="/cis560/portfolio/index" method="post">
 			<div id="table_div"></div>
-			<input type="submit" name="_action_createTransaction" value="Create" />
-		</form>
-		
-
-
 	</div>
 </body>
 </html>
