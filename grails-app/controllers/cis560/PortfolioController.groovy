@@ -75,8 +75,10 @@ class PortfolioController {
 					SqlLogic.SetStatement(getQuantity)
 					ResultSet currentQuantity = SqlLogic.ExecuteQuery()
 					
+					currentQuantity.next()
 					
-					if(currentQuantity.getInt(0) - ${params.Quantity} > 0)
+					
+					if(currentQuantity.getInt(1) - ${params.Quantity} > 0)
 					{
 					//Update quantity 
 						String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
