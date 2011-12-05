@@ -235,26 +235,33 @@ class PortfolioController {
 				
 			SqlLogic.SetStatement(findOwnsQuantity)
 				ResultSet result = SqlLogic.ExecuteQuery()
-				def quantity
+				def quantitynew
 				if(result.next())
 				{
 					
 					quantitynew=result.getString(1)
-					def upadateOwnsQuantity = """UPDATE Owns SET quantity=${quantitynew} WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
-					SqlLogic.SetStatement(upadateOwnsQuantity)
-					SqlLogic.ExecuteUpdate()
+					if(quantitynew!=null)
+					{
+						def upadateOwnsQuantity = """UPDATE Owns SET quantity=${quantitynew} WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
+						SqlLogic.SetStatement(upadateOwnsQuantity)
+						SqlLogic.ExecuteUpdate()
+					}
+					else
+					{
+						def upadateOwnsQuantity = """Delete from Owns  WHERE username='${session.userName}' and ename='${stockList[0]}'  and symbol='${stockList[1]}';"""
+						SqlLogic.SetStatement(upadateOwnsQuantity)
+						SqlLogic.ExecuteUpdate()
+					}
 				}
 				result.close()
 				
-				def deleteOwnsQuantity = """Delete from Owns Where quantity <= 0;"""
+				def deleteOwnsQuantity = """Delete from Owns Where quantity <= 0 or quantity = NULL;"""
 				SqlLogic.SetStatement(deleteOwnsQuantity)
 				SqlLogic.ExecuteUpdate()
 				
-				
-				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
-				
 			}
 		}
+		chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
 	}
 	
 	def createPortfolioMySQL = {
