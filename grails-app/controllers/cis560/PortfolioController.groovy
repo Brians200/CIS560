@@ -57,7 +57,7 @@ class PortfolioController {
 				SqlLogic.SetStatement(deletePortfolio)
 				SqlLogic.ExecuteUpdate()
 				
-				chain(controller:"portfolio",action:"singlePortfolio",model:[portfolio:session.currentPortfolio])
+				chain(controller:"portfolio",action:"index",model:[portfolio:session.currentPortfolio])
 				
 			}
 		}
