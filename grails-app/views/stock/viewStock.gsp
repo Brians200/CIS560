@@ -48,6 +48,7 @@ function drawVolumeChart() {
 	${Exchange}:${Symbol}<br />${company}</h2>
 	<p>Industry: ${industry } - Sector: ${sector }</p>
 	<p>Current Price: $${currentPrice }</p>
+	<p>Percent Change: ${percentChange}</p>
 	<g:form controller="stock">
 		<div>
 			<br/>Show Dates Between<br/>

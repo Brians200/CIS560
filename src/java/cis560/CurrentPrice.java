@@ -18,7 +18,7 @@ public class CurrentPrice {
 		BufferedReader bufferedReader = null;
 		
 		try{
-			url = new URL("http://finance.yahoo.com/d/quotes.csv?s="+symbol+"&f=l1");
+			url = new URL("http://finance.yahoo.com/d/quotes.csv?s="+symbol+"&f=k2l1");
 			urlConnection = url.openConnection();
 			inputStream = new InputStreamReader(urlConnection.getInputStream());
 			bufferedReader = new BufferedReader(inputStream);
@@ -27,6 +27,8 @@ public class CurrentPrice {
 			nextLine = bufferedReader.readLine();
 			if(nextLine !=null)
 			{
+				nextLine = nextLine.substring(7);
+				nextLine = nextLine.replace('"', ' ');
 				return nextLine;
 			}
 			else
