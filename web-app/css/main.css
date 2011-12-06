@@ -338,3 +338,8 @@ a:link.linksToControllers, a:visited.linksToControllers, a:hover.linksToControll
 .transactionCreate{
 	width:97%;
 }
+
+#titlewords
+{
+	color:#FFF ;
+}
