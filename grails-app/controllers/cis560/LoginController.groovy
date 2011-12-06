@@ -5,7 +5,7 @@ class LoginController {
 
 
 	//blank method. just goes to the login.gsp view
-    	def login = { 
+    def login = { 
 
 	}
 	

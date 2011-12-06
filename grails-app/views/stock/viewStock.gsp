@@ -43,8 +43,10 @@ function drawVolumeChart() {
 </head>  
 <body>    
 <div align="center">
+<br/>
 	<h2>
-	${Exchange}:${Symbol}</h2>
+	${Exchange}:${Symbol}<br />${company}</h2>
+	<p>Industry: ${industry } - Sector: ${sector }</p>
 	<g:form controller="stock">
 		<div>
 			<br/>Show Dates Between<br/>

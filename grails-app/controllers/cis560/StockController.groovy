@@ -166,7 +166,22 @@ class StockController {
 		avg = Math.ceil(avg)
 		avg = avg/100
 		avg = (int)avg
+		
+		String companyNameQuery = """select cname, industry, sector from Stock where symbol='${stockSymbol}'"""
+		SqlLogic.SetStatement(companyNameQuery)
+		ResultSet companyNameResult = SqlLogic.ExecuteQuery()
+		
+		def company = ""
+		def industry = ""
+		def sector = ""
+		if(companyNameResult.next())
+		{
+			company = companyNameResult.getString(1)
+			industry = companyNameResult.getString(2)
+			sector = companyNameResult.getString(3)
+		}
+		
 		//model to return
-		[Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
+		[company:company, industry:industry, sector:sector, Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
 	}
 }
