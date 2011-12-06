@@ -78,7 +78,7 @@ class PortfolioController {
 		
 		//WRITE CREATE TRANSACTION QUERY HERE
 		
-		String portfolionameCheck = """INSERT INTO Transactions VALUES('${session.currentPortfolio}','${session.userName}','${params.Exchange}', '${params.Symbol}','${params.Date}','${params.Fee}','${params.Price}','${params.Type.equals("buy")?'b':'s'}' ,'${params.Quantity}')"""
+		String portfolionameCheck = """INSERT INTO Transactions VALUES('${session.currentPortfolio}','${session.userName}','${params.Exchange.toUpperCase()}', '${params.Symbol.toUpperCase() }','${params.Date}','${params.Fee}','${params.Price}','${params.Type.equals("buy")?'b':'s'}' ,'${params.Quantity}')"""
 		SqlLogic.SetStatement(portfolionameCheck)
 		ResultSet portfolioExists = SqlLogic.ExecuteUpdate()
 		
@@ -86,7 +86,7 @@ class PortfolioController {
 		//WRITE OWNS UPDATE HERE
 		
 		//TODO: make sure fields are not blank
-		String transCheck = """SELECT * FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+		String transCheck = """SELECT * FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol.toUpperCase()}'"""
 		SqlLogic.SetStatement(transCheck)
 		ResultSet transExists = SqlLogic.ExecuteQuery()
 		if(transExists.next())
@@ -96,7 +96,7 @@ class PortfolioController {
 				if(	params.Type.equals("buy"))
 				{
 			
-					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+					String updateOwnsTrans = """UPDATE Owns SET quantity = quantity + '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol.toUpperCase()}'"""
 					
 					SqlLogic.SetStatement(updateOwnsTrans)
 					SqlLogic.ExecuteUpdate()
@@ -105,7 +105,7 @@ class PortfolioController {
 				else
 				{
 					//Get current quantity. 
-					String getQuantity = """SELECT quantity FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+					String getQuantity = """SELECT quantity FROM Owns WHERE username = '${session.userName}' AND pname ='${session.currentPortfolio}' AND symbol = '${params.Symbol.toUpperCase()}'"""
 					SqlLogic.SetStatement(getQuantity)
 					ResultSet currentQuantity = SqlLogic.ExecuteQuery()
 					if (currentQuantity.next())
@@ -117,14 +117,14 @@ class PortfolioController {
 						if(currentQuan - sellQuantity > 0)
 						{
 						//Update quantity 
-							String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol}'"""
+							String updateOwnsTrans = """UPDATE Owns SET quantity = quantity - '${params.Quantity}' WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}'AND symbol = '${params.Symbol.toUpperCase()}'"""
 							SqlLogic.SetStatement(updateOwnsTrans)
 							SqlLogic.ExecuteUpdate()
 						}
 						else
 						{
 							//Delete Transaction with quantity 
-							String deleteOwnsTrans = """DELETE FROM Owns WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}' AND symbol = '${params.Symbol}'"""
+							String deleteOwnsTrans = """DELETE FROM Owns WHERE username = '${session.userName}' AND pname = '${session.currentPortfolio}' AND symbol = '${params.Symbol.toUpperCase()}'"""
 							SqlLogic.SetStatement(deleteOwnsTrans)
 							SqlLogic.ExecuteUpdate()
 						}
@@ -138,7 +138,7 @@ class PortfolioController {
 		{
 				//Create a new owns transaction. 
 				
-				String createOwnsTrans = """INSERT INTO Owns VALUES('${session.currentPortfolio}', '${session.userName}','${params.Exchange}','${params.Symbol}','${params.Quantity}')"""
+				String createOwnsTrans = """INSERT INTO Owns VALUES('${session.currentPortfolio}', '${session.userName}','${params.Exchange.toUpperCase()}','${params.Symbol.toUpperCase()}','${params.Quantity}')"""
 				SqlLogic.SetStatement(createOwnsTrans)
 				SqlLogic.ExecuteUpdate()
 				

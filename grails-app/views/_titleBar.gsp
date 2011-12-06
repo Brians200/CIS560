@@ -1,6 +1,6 @@
 <div class="titlebar">
 	<div id="topHeader">
-		<span id="titleText"> Stocks  </span> <span id="loginboxes">
+		<span id="titleText"> <a id="titlewords" href="http://localhost:8080/cis560">Stocks </a> </span> <span id="loginboxes">
 			<g:loginHeader />
 		</span>
 	</div>
@@ -19,6 +19,6 @@
 			<g:link class="linksToControllers" controller="portfolio" action="viewOwns">Profile</g:link>
 		</g:if>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<g:link class="linksToControllers" controller="stock" view="index">Stocks</g:link>
+		<g:link class="linksToControllers" controller="stock" view="index">Listings</g:link>
 	</div>
 </div>

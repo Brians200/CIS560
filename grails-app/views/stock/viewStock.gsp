@@ -58,6 +58,7 @@ function drawVolumeChart() {
 	<div class="graphs" id="price_chart_div"></div> 
 	<div class="graphs" id="volume_chart_div"></div>
 			<h2>Historical Data:</h2>
+			<br />
 		<% 
   			 def Columns = [['string', 'Date'], ['number', 'Adjusted Close'],['number', 'Volume'],['number', 'High'],['number', 'Low'],['number', 'End of Day']]
 		%>
