@@ -191,8 +191,23 @@ class StockController {
 		currentp = Math.ceil(currentp)
 		currentp = currentp/100
 		
+		String redgreen="";
+		if(split[0].contains("-"))
+		{
+			redgreen = """<span id="red">${split[0]}</span>"""	
+		}
+		else
+		{
+			redgreen = """<span id="green">${split[0]}</span>"""
+		}
+		 
+		String color = "lime"
+		if(pcs.contains('-'))
+		{
+			color = "red"
+		}
 		
 		//model to return
-		[percentChange:split[0],currentPrice:currentp, company:company, industry:industry, sector:sector, Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
+		[colorr:color,percentChange:redgreen,currentPrice:currentp, company:company, industry:industry, sector:sector, Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
 	}
 }

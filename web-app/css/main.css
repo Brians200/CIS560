@@ -343,3 +343,13 @@ a:link.linksToControllers, a:visited.linksToControllers, a:hover.linksToControll
 {
 	color:#FFF ;
 }
+
+#red
+{
+	color:#FF0000;
+}
+
+#green
+{
+	color:#00FF00;
+}

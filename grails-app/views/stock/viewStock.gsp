@@ -20,7 +20,7 @@ data.addColumn('number', 'Price');
 data.addRows(${Tablep});      
 // Set chart options     
 
- var options = {'title':'Price ${PChange}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: 'lime',type:"area", visibleInLegend: false}}};      
+ var options = {'title':'Price ${PChange}','width':768,'height':300,scaleType:'allmaximized' ,series: {0:{color: '${colorr}',type:"area", visibleInLegend: false}}};      
 // Instantiate and draw our chart, passing in some options.      
 var chart = new google.visualization.AreaChart(document.getElementById('price_chart_div'));      
 chart.draw(data, options);    
@@ -47,12 +47,13 @@ function drawVolumeChart() {
 	<h2>
 	${Exchange}:${Symbol}<br />${company}</h2>
 	<p>Industry: ${industry } - Sector: ${sector }</p>
-	<p>Current Price: $${currentPrice }</p>
-	<p>Percent Change: ${percentChange}</p>
+	Current Price: $${currentPrice }
+	<br/>Percent Change: ${percentChange}
 	<g:form controller="stock">
 		<div>
 			<br/>Show Dates Between<br/>
 			<span><g:datePicker name="startDate" value="${datePickerStart}" precision="day" years="${2011}"/></span>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<span><g:datePicker name="finishDate" value="${datePickerFinish}" precision="day" years="${2011}"/></span>
 			<span><g:actionSubmit value="Update" action="updateChartDates"/></span>
 		</div>
