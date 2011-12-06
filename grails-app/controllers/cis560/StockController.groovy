@@ -181,7 +181,15 @@ class StockController {
 			sector = companyNameResult.getString(3)
 		}
 		
+		String currentPrice = CurrentPrice.getCurrentPrice(stockSymbol)
+		double currentp = Double.parseDouble(currentPrice)
+		
+		currentp = currentp *100
+		currentp = Math.ceil(currentp)
+		currentp = currentp/100
+		
+		
 		//model to return
-		[company:company, industry:industry, sector:sector, Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
+		[currentPrice:currentp, company:company, industry:industry, sector:sector, Symbol:stockSymbol, Exchange:stockExchange, Tablep:tablep, Tablev:tablev, PChange:pcs, Neg:negative, datePickerStart:lastmo, datePickerFinish:today,AverageVolume:avg,Tablet:tablet]
 	}
 }
