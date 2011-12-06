@@ -10,8 +10,8 @@
 					${flash.message}
 				</div>
 			</g:if>
-			<h2>${exchange }</h2>
-		
+			<h2>Listings On: ${exchange }</h2>
+		<br />
 			<% 
 			   def Columns = [['string', 'Symbol'], ['string', 'Company Name'],['string', 'IPO Year'],['number', 'Market Capacity'],['string', 'Industry'],['string', 'Sector']]
 			%><gvisualization:table elementId="table_div" allowHtml="${true}" showRowNumber="${false}" 

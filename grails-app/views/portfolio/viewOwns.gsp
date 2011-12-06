@@ -10,7 +10,9 @@
 				${flash.message}
 			</div>
 		</g:if>
+		<div align="center">
 		<h2>You currently own:</h2>
+		<br />
 		<% 
   			 def Columns = [['string', 'Exchange'], ['string', 'Symbol'],['string', 'Quantity']]
 		%>
@@ -18,6 +20,7 @@
 			showRowNumber="${false}" columns="${Columns}"
 			data="${ownershipList}" />
 			<div id="table_div"></div>
+			</div>
 	</div>
 </body>
 </html>

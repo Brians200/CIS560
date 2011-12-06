@@ -9,8 +9,9 @@
 					${flash.message}
 				</div>
 			</g:if>
-			
-			<p>Select an exchange</p>
+			<div align="center">
+			<h2>Select Exchange</h2>
+			<br />
 			
 			<g:each in="${exchanges}" var="exchange">
 				<p>
@@ -18,7 +19,8 @@
 						${exchange}
 					</g:link>
 				</p>
-			</g:each>			
+			</g:each>	
+			</div>		
 		</div>
 	</body>
 </html>
